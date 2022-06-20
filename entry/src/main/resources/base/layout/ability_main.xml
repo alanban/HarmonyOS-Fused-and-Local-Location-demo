@@ -16,6 +16,28 @@
             ohos:orientation="vertical">
 
             <Button
+                ohos:id="$+id:btn_start_location_service"
+                ohos:height="match_content"
+                ohos:width="match_content"
+                ohos:background_element="#FF51A8DD"
+                ohos:layout_alignment="horizontal_center"
+                ohos:margin="5vp"
+                ohos:padding="10vp"
+                ohos:text="Start location service"
+                ohos:text_size="25"/>
+
+            <Button
+                ohos:id="$+id:btn_stop_location_service"
+                ohos:height="match_content"
+                ohos:width="match_content"
+                ohos:background_element="#FF51A8DD"
+                ohos:layout_alignment="horizontal_center"
+                ohos:margin="5vp"
+                ohos:padding="10vp"
+                ohos:text="Stop location service"
+                ohos:text_size="25"/>
+
+            <Button
                 ohos:id="$+id:btn_requestLocationCallback"
                 ohos:height="match_content"
                 ohos:width="match_content"

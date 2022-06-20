@@ -86,6 +86,16 @@
         "name": "com.huawei.sample.harmony.location.ability.CoordinateAbility",
         "description": "",
         "type": "page"
+      },
+      {
+        "backgroundModes": [
+          "dataTransfer",
+          "location"
+        ],
+        "name": "com.huawei.sample.harmony.location.ability.ForegroundLocationServiceAbility",
+        "icon": "$media:icon",
+        "description": "$string:foregroundlocationserviceability_description",
+        "type": "service"
       }
     ],
     "reqPermissions": [
@@ -95,11 +105,19 @@
       },
       {
         "name": "ohos.permission.LOCATION",
-        "reason": "Allows applications to obtain location information when running in the foreground."
+        "reason": "Allows applications to obtain location information when running in the foreground.",
+        "usedScene": {
+          "ability": ["com.huawei.sample.harmony.location.ability.ForegroundLocationServiceAbility"],
+          "when": "always"
+        }
       },
       {
         "name": "ohos.permission.LOCATION_IN_BACKGROUND",
-        "reason": "Allows applications to obtain location information when running in the background"
+        "reason": "Allows applications to obtain location information when running in the background",
+        "usedScene": {
+          "ability": ["com.huawei.sample.harmony.location.ability.ForegroundLocationServiceAbility"],
+          "when": "always"
+        }
       }
     ]
   }

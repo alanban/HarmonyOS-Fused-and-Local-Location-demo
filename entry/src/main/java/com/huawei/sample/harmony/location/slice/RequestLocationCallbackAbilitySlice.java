@@ -135,8 +135,9 @@ public class RequestLocationCallbackAbilitySlice extends BaseAbilitySlice implem
 
     private LocationRequest buildLocationRequest() {
         LocationRequest locationRequest = new LocationRequest();
-        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        locationRequest.setInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(100);
+        locationRequest.setFastestInterval(100);
         locationRequest.setNeedAddress(true);
         locationRequest.setLanguage("zh");
         return locationRequest;

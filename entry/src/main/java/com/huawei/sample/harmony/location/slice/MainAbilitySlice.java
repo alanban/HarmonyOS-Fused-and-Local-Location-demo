@@ -16,17 +16,25 @@
 
 package com.huawei.sample.harmony.location.slice;
 
+import com.huawei.sample.harmony.location.ability.ForegroundLocationServiceAbility;
+import ohos.aafwk.ability.IAbilityConnection;
 import ohos.aafwk.content.Intent;
+import ohos.aafwk.content.Operation;
 import ohos.agp.components.Component;
+import ohos.agp.window.dialog.ToastDialog;
 import ohos.bundle.ElementName;
 import ohos.hiviewdfx.HiLog;
 
 import com.huawei.harmony.location.ResourceTable;
+import ohos.rpc.IRemoteObject;
 
 public class MainAbilitySlice extends BaseAbilitySlice implements Component.ClickedListener {
     private static final String TAG = "MainAbilitySlice";
 
     private String bundleName = "com.huawei.sample.harmony.location";
+
+    private String ABILITY_NAME = "com.huawei.sample.harmony.location.ability.ForegroundLocationServiceAbility";
+
 
     @Override
     public void onStart(Intent intent) {
@@ -34,7 +42,8 @@ public class MainAbilitySlice extends BaseAbilitySlice implements Component.Clic
         super.setUIContent(ResourceTable.Layout_ability_main);
 
         checkSelfPermission();
-
+        findComponentById(ResourceTable.Id_btn_stop_location_service).setClickedListener(this);
+        findComponentById(ResourceTable.Id_btn_start_location_service).setClickedListener(this);
         findComponentById(ResourceTable.Id_btn_requestLocationCallback).setClickedListener(this);
         findComponentById(ResourceTable.Id_btn_getLastLocation).setClickedListener(this);
         findComponentById(ResourceTable.Id_btn_getLocationAvailability).setClickedListener(this);
@@ -56,6 +65,12 @@ public class MainAbilitySlice extends BaseAbilitySlice implements Component.Clic
     @Override
     public void onClick(Component component) {
         switch (component.getId()) {
+            case ResourceTable.Id_btn_start_location_service:
+                startLocationService();
+                break;
+            case ResourceTable.Id_btn_stop_location_service:
+                startLocationService();
+                break;
             case ResourceTable.Id_btn_requestLocationCallback:
                 startLocationCallbackAbility();
                 break;
@@ -77,6 +92,38 @@ public class MainAbilitySlice extends BaseAbilitySlice implements Component.Clic
             default:
                 break;
         }
+    }
+
+    private final IAbilityConnection connection = new IAbilityConnection() {
+        @Override
+        public void onAbilityConnectDone(ElementName elementName, IRemoteObject remoteObject, int i) {
+            if (remoteObject instanceof ForegroundLocationServiceAbility.LocationRemoteObject) {
+                ForegroundLocationServiceAbility.LocationRemoteObject locationRemoteObject = (ForegroundLocationServiceAbility.LocationRemoteObject) remoteObject;
+                locationRemoteObject.startLocation();
+            }
+        }
+
+        @Override
+        public void onAbilityDisconnectDone(ElementName elementName, int i) {
+
+        }
+    };
+
+
+    private void startLocationService(){
+        Intent intent = new Intent();
+        Operation operation = new Intent.OperationBuilder()
+                .withDeviceId("")
+                .withBundleName(bundleName)
+                .withAbilityName(ABILITY_NAME)
+                .build();
+        intent.setOperation(operation);
+        startAbility(intent);
+        connectAbility(intent, connection);
+    }
+
+    private void stopLocationService(){
+        disconnectAbility(connection);
     }
 
     private void startGeocoderAbility() {

@@ -11,6 +11,10 @@
     {
       "name": "coordinateability_HelloWorld",
       "value": "Hello World"
+    },
+    {
+      "name": "foregroundlocationserviceability_description",
+      "value": "hap sample empty service"
     }
   ]
 }

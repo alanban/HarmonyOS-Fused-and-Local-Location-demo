@@ -2,6 +2,17 @@
 apply plugin: 'com.huawei.ohos.app'
 
 ohos {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\Admin\\.ohos\\config\\hag\\auto_debug_hag_location_2850086000387532606.p12')
+            storePassword '00000018045FFF63DA56A630970504C054E772B1138D0397A84557C96D4F196B751158AE68D2F411'
+            keyAlias = 'debugKey'
+            keyPassword '00000018D46BF1E0C196806CDA05A281A7CBC7D8945B3BB562544D56D37F583765C72CF27FC47E50'
+            signAlg = 'SHA256withECDSA'
+            profile file('C:\\Users\\Admin\\.ohos\\config\\hag\\auto_debug_hag_location_2850086000387532606.p7b')
+            certpath file('C:\\Users\\Admin\\.ohos\\config\\hag\\auto_debug_hag_location_2850086000387532606.cer')
+        }
+    }
     compileSdkVersion 5
     defaultConfig {
         compatibleSdkVersion 5
@@ -19,8 +30,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.huawei.ohos:hap:2.4.4.2'
-        classpath 'com.huawei.ohos:decctest:1.2.4.0'
+        classpath 'com.huawei.ohos:hap:3.0.5.2'
+        classpath 'com.huawei.ohos:decctest:1.2.7.2'
         // Adding the dependency of the agconnect service
         classpath 'com.huawei.agconnect:agcp-harmony:1.1.0.300'
     }
